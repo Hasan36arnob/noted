@@ -23,7 +23,7 @@ class NotetakingApp {
         this.renderNotes();
         this.updateEmptyState();
     }
-
+//j
     cacheElements() {
         this.elements = {
             noteList: document.getElementById('noteList'),
