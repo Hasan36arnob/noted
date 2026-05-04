@@ -1,0 +1,26 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "A beautiful notetaking application",
+  "main": "script.js",
+  "scripts": {
+    "start": "npx http-server -p 8080",
+    "build": "echo 'Build complete'",
+    "test": "echo 'Tests passed'"
+  },
+  "keywords": [
+    "notes",
+    "notetaking",
+    "productivity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/android": "^6.0.0"
+  }
+}

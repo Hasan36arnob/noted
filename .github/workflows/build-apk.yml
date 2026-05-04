@@ -1,0 +1,68 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+      
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      
+      - name: Install Capacitor CLI
+        run: npm install @capacitor/core @capacitor/cli @capacitor/android --save
+      
+      - name: Initialize Capacitor
+        run: npx cap init NotesApp com.example.notes --webDir=.
+      
+      - name: Add Android Platform
+        run: npx cap add android
+      
+      - name: Sync Capacitor
+        run: npx cap sync android
+      
+      - name: Build Android App
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+      
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: notes-app-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+      
+      - name: Show Build Success
+        run: echo "✅ APK built successfully!"
