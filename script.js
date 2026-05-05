@@ -29,7 +29,8 @@ class NotetakingApp {
             noteList: document.getElementById('noteList'),
             noteListContainer: document.getElementById('noteListContainer'),
             noteEditorContainer: document.getElementById('noteEditorContainer'),
-            noteTitle: document.getElementById('noteTitle'),
+            noteTitle: document
+            .getElementById('noteTitle'),
             noteContent: document.getElementById('noteContent'),
             noteTimestamp: document.getElementById('noteTimestamp'),
             addNoteBtn: document.getElementById('addNoteBtn'),
